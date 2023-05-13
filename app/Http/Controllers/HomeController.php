@@ -9,6 +9,7 @@ use App\Models\BookAuthor;
 use App\Models\Category;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\ReviewNotificationJob;
 
 class HomeController extends Controller
 {
@@ -60,12 +61,17 @@ class HomeController extends Controller
             $data = $request->all();
             // storing data in reviews table
             $user_id = Auth::user()->id;
+            $email = Auth::user()->email;
             Review::insert([
                 'user_id'=> $user_id,
                 'book_id'=>$data['book_id'],
                 'rating'=>$data['rating'],
                 'review'=>$data['review']
             ]);
+            $book_detail = Book::find($data['book_id']);
+            $book_title = $book_detail->title;
+            // code for sending mail notification to user
+            ReviewNotificationJob::dispatch($email,$book_title,$data['review'])->delay(now()->addSeconds(60));
             return  redirect('/bookdetail?book_id='.$data['book_id']);
         }catch(\Exception $e){
             return false;

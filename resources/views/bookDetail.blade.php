@@ -42,7 +42,7 @@
                 <h4>Average Rating</h4>
             </div>
             <div class="col">
-                <h5>{{$avg}}</h5>
+                <h5>{{round($avg, 1)}} <i class="fa fa-star fa-sm"></i> / 5</h5>
             </div>
         </div>
         <div class="row">
@@ -76,14 +76,15 @@
             </div>
           </div>
 
-
+          <ul class="list-group">
         @foreach($data['reviews'] as $review)
             <div class="row">
                 <div class="col">
-                    <p>{{$review['review']}}</p>
+                        <li class="list-group-item">{{$review['review']}}</li>
                 </div>
             </div>
         @endforeach
+          </ul>
     </div>
 </div>
 @endsection
