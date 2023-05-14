@@ -21,13 +21,13 @@
                     <td>{{$books['description']}}</td>
                     <td>{{$books['price']}}</td>
                     <td>{{$books['category']['name'] ?? ""}}</td>
-                    @foreach($books['authors'] as $author)
-                        <td>
-                            <span class="badge text-bg-primary">{{$author['name']}}</span>
-                        </td>
-                    @endforeach
                     <td>
-                        <button class="btn btn-primary" onclick="window.location.href='{{route('book-detail').'?book_id='.$books['id']}}'">View Details</button>
+                    @foreach($books['authors'] as $author)
+                            <span class="badge text-bg-primary">{{$author['name']}}</span>
+                        @endforeach
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="window.location.href='{{route('book-detail').'?book_id='.$books['id']}}'">View Details</button>
                     </td>
                 </tr>
                 @endforeach

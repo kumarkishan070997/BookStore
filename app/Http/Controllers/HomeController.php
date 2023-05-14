@@ -41,6 +41,7 @@ class HomeController extends Controller
         $result = $result->toArray();
         return view('home')->with(['data'=>$result]);
     }
+    // function to get single book detail
     public function getBookDetail(Request $request){
         $data = $request->all();
         $result = Book::with('category')
@@ -56,6 +57,7 @@ class HomeController extends Controller
         // making a response here like cal
         return view('bookDetail')->with(['data'=>$result,'avg'=>$avg_rating]);
     }
+    // function to create dummy entries for book reviews
     public function createReview(Request $request){
         try{
             $data = $request->all();
@@ -77,6 +79,7 @@ class HomeController extends Controller
             return false;
         }
     }
+    // common query to fetch book detail and store detail
     public function getBooks(){
         try{
             // making array to store in database
@@ -88,25 +91,25 @@ class HomeController extends Controller
                     'category_id'=>1
                 ],
                 [
-                    'title'=>'ABSALOM, ABSALOM! BY WILLIAM FAULKNER',
+                    'title'=>'A smile in the mind',
                     'description'=>'sample description',
                     'price'=>100,
                     'category_id'=>1
                 ],
                 [
-                    'title'=>'ABSALOM, ABSALOM! BY WILLIAM FAULKNER',
+                    'title'=>'The Power of Now',
                     'description'=>'sample description',
                     'price'=>100,
                     'category_id'=>2
                 ],
                 [
-                    'title'=>'ABSALOM, ABSALOM! BY WILLIAM FAULKNER',
+                    'title'=>'Lean In',
                     'description'=>'sample description',
                     'price'=>100,
                     'category_id'=>3
                 ],
                 [
-                    'title'=>'ABSALOM, ABSALOM! BY WILLIAM FAULKNER',
+                    'title'=>'The Brain That Changes Itself',
                     'description'=>'sample description',
                     'price'=>100,
                     'category_id'=>4
